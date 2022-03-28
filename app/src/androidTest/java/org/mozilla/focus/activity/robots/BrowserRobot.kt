@@ -367,6 +367,12 @@ class BrowserRobot {
         )
     }
 
+    fun clickSetCookiesButton() {
+        val setCookiesButton = mDevice.findObject(UiSelector().resourceId("setCookies"))
+        setCookiesButton.waitForExists(waitingTime)
+        setCookiesButton.click()
+    }
+
     class Transition {
         fun openSearchBar(interact: SearchRobot.() -> Unit): SearchRobot.Transition {
             browserURLbar.waitForExists(waitingTime)
