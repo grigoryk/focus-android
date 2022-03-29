@@ -52,7 +52,7 @@ class BrowserRobot {
         runWithIdleRes(sessionLoadedIdlingResource) {
             assertTrue(
                 mDevice.findObject(UiSelector().textContains(expectedText))
-                    .waitForExists(20000)
+                    .waitForExists(25000)
             )
         }
     }

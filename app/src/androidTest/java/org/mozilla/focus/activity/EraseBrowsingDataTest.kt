@@ -23,6 +23,7 @@ import org.mozilla.focus.activity.robots.searchScreen
 import org.mozilla.focus.helpers.FeatureSettingsHelper
 import org.mozilla.focus.helpers.MainActivityFirstrunTestRule
 import org.mozilla.focus.helpers.MockWebServerHelper
+import org.mozilla.focus.helpers.RetryTestRule
 import org.mozilla.focus.helpers.TestAssetHelper.getGenericTabAsset
 import org.mozilla.focus.helpers.TestHelper.getStringResource
 import org.mozilla.focus.helpers.TestHelper.mDevice
@@ -40,9 +41,9 @@ class EraseBrowsingDataTest {
     @get: Rule
     var mActivityTestRule = MainActivityFirstrunTestRule(showFirstRun = false)
 
-    // @Rule
-    // @JvmField
-    // val retryTestRule = RetryTestRule(3)
+    @Rule
+    @JvmField
+    val retryTestRule = RetryTestRule(3)
 
     @Before
     fun setUp() {
