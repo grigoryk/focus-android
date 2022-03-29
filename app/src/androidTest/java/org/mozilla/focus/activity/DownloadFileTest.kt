@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mozilla.focus.activity.robots.browserScreen
 import org.mozilla.focus.activity.robots.downloadRobot
 import org.mozilla.focus.activity.robots.notificationTray
 import org.mozilla.focus.activity.robots.searchScreen
@@ -19,10 +20,12 @@ import org.mozilla.focus.helpers.DeleteFilesHelper.deleteFileUsingDisplayName
 import org.mozilla.focus.helpers.FeatureSettingsHelper
 import org.mozilla.focus.helpers.MainActivityIntentsTestRule
 import org.mozilla.focus.helpers.RetryTestRule
+import org.mozilla.focus.helpers.StringsHelper.GOOGLE_DRIVE
 import org.mozilla.focus.helpers.StringsHelper.GOOGLE_PHOTOS
 import org.mozilla.focus.helpers.TestHelper
 import org.mozilla.focus.helpers.TestHelper.assertNativeAppOpens
 import org.mozilla.focus.helpers.TestHelper.mDevice
+import org.mozilla.focus.helpers.TestHelper.permAllowBtn
 import org.mozilla.focus.helpers.TestHelper.readTestAsset
 import org.mozilla.focus.helpers.TestHelper.verifySnackBarText
 import org.mozilla.focus.helpers.TestHelper.waitingTime
@@ -159,6 +162,31 @@ class DownloadFileTest {
             verifyDownloadConfirmationMessage(downloadFileName)
             openDownloadedFile()
             assertNativeAppOpens(GOOGLE_PHOTOS)
+        }
+    }
+
+    @SmokeTest
+    @Test
+    fun downloadAndOpenPDFFileTest() {
+        downloadFileName = "washington.pdf"
+
+        searchScreen {
+        }.loadPage(downloadTestPage) {
+            progressBar.waitUntilGone(TestHelper.waitingTime)
+        }
+        browserScreen {
+            clickLinkMatchingText(downloadFileName)
+        }
+        // If permission dialog appears on devices with API<30, grant it
+        if (permAllowBtn.waitForExists(TestHelper.waitingTime)) {
+            permAllowBtn.click()
+        }
+        downloadRobot {
+            verifyDownloadDialog(downloadFileName)
+            clickDownloadButton()
+            verifyDownloadConfirmationMessage(downloadFileName)
+            openDownloadedFile()
+            assertNativeAppOpens(GOOGLE_DRIVE)
         }
     }
 }
