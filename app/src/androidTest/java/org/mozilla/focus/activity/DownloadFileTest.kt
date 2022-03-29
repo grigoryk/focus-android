@@ -33,6 +33,8 @@ import java.io.IOException
 class DownloadFileTest {
     private lateinit var webServer: MockWebServer
     private val featureSettingsHelper = FeatureSettingsHelper()
+    private val downloadTestPage = "https://storage.googleapis.com/mobile_test_assets/test_app/downloads.html"
+    private lateinit var downloadFileName: String
 
     @get:Rule
     var mActivityTestRule = MainActivityIntentsTestRule(showFirstRun = false)
@@ -82,7 +84,7 @@ class DownloadFileTest {
             throw AssertionError("Could not stop web server", e)
         }
         val context = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
-        deleteFileUsingDisplayName(context, "download.jpg")
+        deleteFileUsingDisplayName(context, downloadFileName)
         featureSettingsHelper.resetAllFeatureFlags()
     }
 
@@ -90,7 +92,7 @@ class DownloadFileTest {
     @Test
     fun downloadNotificationTest() {
         val downloadPageUrl = webServer.url("").toString()
-        val downloadFileName = "download.jpg"
+        downloadFileName = "download.jpg"
 
         notificationTray {
             mDevice.openNotification()
@@ -140,7 +142,7 @@ class DownloadFileTest {
     @Test
     fun openDownloadFileTest() {
         val downloadPageUrl = webServer.url("").toString()
-        val downloadFileName = "download.jpg"
+        downloadFileName = "download.jpg"
 
         // Load website with service worker
         searchScreen {
