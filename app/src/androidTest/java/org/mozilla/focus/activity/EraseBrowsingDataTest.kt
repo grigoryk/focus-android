@@ -12,7 +12,6 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +22,6 @@ import org.mozilla.focus.activity.robots.searchScreen
 import org.mozilla.focus.helpers.FeatureSettingsHelper
 import org.mozilla.focus.helpers.MainActivityFirstrunTestRule
 import org.mozilla.focus.helpers.MockWebServerHelper
-import org.mozilla.focus.helpers.RetryTestRule
 import org.mozilla.focus.helpers.TestAssetHelper.getGenericTabAsset
 import org.mozilla.focus.helpers.TestHelper.getStringResource
 import org.mozilla.focus.helpers.TestHelper.mDevice
@@ -41,9 +39,9 @@ class EraseBrowsingDataTest {
     @get: Rule
     var mActivityTestRule = MainActivityFirstrunTestRule(showFirstRun = false)
 
-    @Rule
-    @JvmField
-    val retryTestRule = RetryTestRule(3)
+    // @Rule
+    // @JvmField
+    // val retryTestRule = RetryTestRule(3)
 
     @Before
     fun setUp() {
@@ -114,7 +112,7 @@ class EraseBrowsingDataTest {
         }
     }
 
-    @Ignore("See: https://github.com/mozilla-mobile/focus-android/issues/6438")
+    //@Ignore("See: https://github.com/mozilla-mobile/focus-android/issues/6438")
     @SmokeTest
     @Test
     fun systemBarHomeViewTest() {
