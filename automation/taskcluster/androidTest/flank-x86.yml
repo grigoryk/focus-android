@@ -38,8 +38,8 @@ gcloud:
   performance-metrics: true
 
   test-targets:
-    - package org.mozilla.focus.activity
-    - package org.mozilla.focus.privacy
+    - class org.mozilla.focus.activity.DownloadFileTypesTest#downloadAndOpenWEBMFileTest
+    - class org.mozilla.focus.activity.DownloadFileTypesTest#downloadAndOpenPDFFileTest
 
   device:
    - model: Pixel3
