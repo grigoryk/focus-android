@@ -38,7 +38,7 @@ gcloud:
   performance-metrics: true
 
   test-targets:
-    - package org.mozilla.focus.activity.EraseBrowsingDataTest#systemBarHomeViewTest
+    #- package org.mozilla.focus.activity
     - package org.mozilla.focus.privacy.LocalSessionStorageTest#eraseCookiesTest
 
   device:
